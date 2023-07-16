@@ -1,0 +1,50 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Img\1.png" />
+    <None Remove="Img\2.png" />
+    <None Remove="Img\3.png" />
+    <None Remove="Img\4.png" />
+    <None Remove="Img\8.png" />
+    <None Remove="Img\contract.png" />
+    <None Remove="Img\SMS.png" />
+    <None Remove="Views\Img\contract.png" />
+    <None Remove="Views\Img\penpaper.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Img\8.png" />
+    <Resource Include="Img\contract.png" />
+    <Resource Include="Img\SMS.png" />
+    <Resource Include="Views\Img\contract.png" />
+    <Resource Include="Views\Img\penpaper.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Img\1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Img\2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Img\3.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Img\4.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0" />
+    <PackageReference Include="MahApps.Metro.IconPacks.Material" Version="4.11.0" />
+  </ItemGroup>
+
+</Project>

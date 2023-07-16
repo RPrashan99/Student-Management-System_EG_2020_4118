@@ -1,0 +1,150 @@
+﻿        [ObservableProperty]
+        public string? idE;
+
+        [ObservableProperty]
+        public string? firstNameE;
+
+        [ObservableProperty]
+        public string? lastNameE;
+
+        [ObservableProperty]
+        public string? addressE;
+
+        [ObservableProperty]
+        public string? genderE;
+
+        [ObservableProperty]
+        public string? bDayE;
+
+        [ObservableProperty]
+        public string? departmentE;
+
+        [ObservableProperty]
+        public BitmapImage? selectedImgE;
+
+        [ObservableProperty]
+        public Image? imgE;
+
+        [ObservableProperty]
+        public string? mdIDE;
+
+        [ObservableProperty]
+        public string? mdResultE;
+
+        public ObservableCollection<Module> _allModulesE = new ObservableCollection<Module>();
+
+        public ObservableCollection<Module> allModulesE { get { return _allModulesE; } }
+
+        public List<Module> modules; //store all the modules
+
+        public List<string> results;
+
+        public Action? closeAction { get; internal set; }
+
+        public EditWindowVM(Student student)
+        {
+            modules = new List<Module>()
+            {
+                new Module("EE3301", "Analog Electronics", 3, "DNF"),
+                new Module("EE3302", "Data Structures and Algorithms", 3, "DNF"),
+                new Module("EE3305", "Signals and Systems", 3, "F"),
+                new Module("EE3203", "Electrical and Electronic Measurements", 3, "DNF"),
+                new Module("EE3206", "GUI Programming", 3, "DNF"),
+                new Module("EE3151", "Programming Project", 3, "DNF")
+            };
+
+            results = new List<string>()
+            {
+                new string("A+"),
+                new string("A"),
+                new string("A-"),
+                new string("B+"),
+                new string("B"),
+                new string("B-"),
+                new string("C+"),
+                new string("C"),
+                new string("C-"),
+                new string("F")
+            };
+
+            FnameE = student.fName;
+            LnameE = student.lName;
+            AddressE = student.address;
+            BDayE = student.birthday;
+            GenderE = student.gender;
+            DepartmentE = student.department;
+            SelectedImgE = student.bImage;
+            IdE = student.ID;
+
+            if(student.modules != null)
+            {
+                foreach (Module n in student.modules)
+                {
+                    allModulesE.Add(n);
+                }
+            }
+        }
+ 
+ 
+ [RelayCommand]
+        public void EditStudent()
+        {
+            if (FirstNameE != null)
+            {
+                closeAction();
+            }
+        }
+
+        [RelayCommand]
+        public void UploadNewPhoto()
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "Image files | *.bmp; *.png; *.jpg";
+            dialog.FilterIndex = 1;
+            if (dialog.ShowDialog() == true)
+            {
+                SelectedImgE = new BitmapImage(new Uri(dialog.FileName));
+
+                MessageBox.Show("Imgae successfuly uploded!", "successfull");
+            }
+        }
+
+        [RelayCommand]
+        public void EditModules()
+        {
+            if (allModulesE.Any(m => m.moduleID == MdIDE))
+            {
+                Module editmodule = allModulesE.First(m=> m.moduleID == MdIDE);
+                int index = allModulesE.IndexOf(editmodule);
+
+                allModulesE[index].moduleResult = MdResultE;
+
+                MessageBoxResult messageBoxResult = MessageBox.Show("Module result changed!");
+            }
+            else if (modules.Any(m => m.moduleID == MdIDE))
+            {
+                MessageBoxResult messageBoxResult = MessageBox.Show("Module Not Found\n Do you want to add new module?","Module",MessageBoxButton.YesNo);
+
+                if(messageBoxResult == MessageBoxResult.Yes)
+                {
+                    Module newMod = modules.Find(m => m.moduleID == MdIDE);
+
+                    string mdResultUp = MdResultE.ToUpper();
+
+                    if (results.Any(r => r.Equals(MdResultE) || r.Equals(mdResultUp)))
+                    {
+                        newMod.moduleResult = MdResultE;
+                        allModulesE.Add(newMod);
+                        MessageBoxResult messageBoxResult1 = MessageBox.Show("Module added!");
+                    }
+                    else
+                    {
+                        MessageBoxResult messageBoxResult1 = MessageBox.Show("Module not added, enter valid result");
+                    }
+                }
+            }
+            else
+            {
+                MessageBoxResult messageBoxResult = MessageBox.Show("Module Not Found, check module ID");
+            }
+        }

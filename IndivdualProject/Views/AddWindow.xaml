@@ -1,0 +1,473 @@
+﻿<Window x:Class="IndivdualProject.Views.AddWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:local="clr-namespace:IndivdualProject.Views"
+        xmlns:local2 ="clr-namespace:IndivdualProject.ViewModels"
+        mc:Ignorable="d"
+        ResizeMode="NoResize"
+        Background="Transparent"
+        Title="AddWindow" Height="470" Width="660">
+    
+    <Window.DataContext>
+        <local2:AddWindowVM/>
+    </Window.DataContext>
+
+    <Window.Resources>
+        <BitmapImage x:Key="DesignTimeImage" UriSource="../Img/8.png"/>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border CornerRadius="0 0 0 20">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0 0" EndPoint="1 1">
+                    <GradientStop Color="Aqua" Offset="0.1"/>
+                    <GradientStop Color="DarkCyan" Offset="0.3"/>
+                    <GradientStop Color="DarkCyan" Offset="0.5"/>
+                    <GradientStop Color="DarkCyan" Offset="0.7"/>
+                    <GradientStop Color="Cyan" Offset="0.95"/>
+                </LinearGradientBrush>
+            </Border.Background>
+
+        </Border>
+
+        <Border CornerRadius="0 0 0 0" Grid.Column="1">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0.5 0" EndPoint="0.5 1">
+                    <GradientStop Color="DarkCyan" Offset="0.1"/>
+                    <GradientStop Color="DimGray" Offset="0.1"/>
+                    <GradientStop Color="Gray" Offset="0.5"/>
+                    <GradientStop Color="DimGray" Offset="0.9"/>
+                    <GradientStop Color="DarkCyan" Offset="0.9"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+
+        <Canvas Grid.Row="0">
+            <Ellipse Width="115" Height="115" Fill="Gray"
+                     Canvas.Left="25"
+                     Canvas.Top="144.7"/>
+        </Canvas>
+
+        <StackPanel Orientation="Vertical" 
+                    VerticalAlignment="Center">
+
+            <TextBlock Text="Profile Picture"
+                       FontWeight="Bold"
+                       HorizontalAlignment="Center"
+                       Margin="10"
+                       FontSize="15"/>
+
+            <Border Name="Mask"
+                    CornerRadius="90"
+                    BorderBrush="White"
+                    BorderThickness="2"
+                    Width="120"
+                    Height="120">
+
+                <!--<StackPanel>
+                    <StackPanel.OpacityMask>
+                        <VisualBrush Visual="{Binding ElementName=Mask}"/>
+                    </StackPanel.OpacityMask>
+                    
+                    <Image Source="{Binding SelectedImg,UpdateSourceTrigger=PropertyChanged}"/>
+                </StackPanel>-->
+                
+                <Border.Background>
+                    <ImageBrush Stretch="Fill" ImageSource="{Binding SelectedImg,UpdateSourceTrigger=PropertyChanged,FallbackValue={StaticResource DesignTimeImage}}"/>
+                </Border.Background>
+
+                <!--<Image Source="{Binding SelectedImg,UpdateSourceTrigger=PropertyChanged}"
+                       Stretch="Fill"/>-->
+
+            </Border>
+
+            <Button Content="Insert" Width="100"
+                    Margin="0 20" 
+                    Style="{StaticResource SubMenuText}"
+                    HorizontalAlignment="Center"
+                    Command="{Binding UploadPhotoCommand}"/>
+        </StackPanel>
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="320"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+
+            <Border>
+                <Border.Background>
+                    <SolidColorBrush Color="Darkcyan"/>
+                </Border.Background>
+            </Border>
+
+            <Border Grid.Row="1">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0.5 0" EndPoint="0.5 1">
+                        <GradientStop Color="DimGray" Offset="0.1"/>
+                        <GradientStop Color="Gray" Offset="0.5"/>
+                        <GradientStop Color="DimGray" Offset="0.9"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
+
+            <Border Grid.Row="2">
+                <Border.Background>
+                    <SolidColorBrush Color="Darkcyan"/>
+                </Border.Background>
+            </Border>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+
+                <Image Source="Img/contract.png" Margin="10 15"/>
+
+                <TextBlock Text="STUDENT DETAILS" 
+                     FontWeight="Bold"
+                     TextAlignment="Center"
+                     Margin="0 15 0 15"
+                     FontSize="20"/>
+
+            </StackPanel>
+      
+
+            <ScrollViewer VerticalScrollBarVisibility="Visible" Grid.Row="1">
+
+                <StackPanel Orientation="Vertical" Grid.Column="1" 
+                        RenderTransformOrigin="0.503,0.499"
+                        Margin="40 0 0 0">
+
+                    <StackPanel Orientation="Horizontal">
+
+                        <TextBlock Text="First Name"
+                                Margin="0 0"
+                                FontWeight="Bold"/>
+
+                        <TextBlock Text="Last Name"
+                                Margin="163 0 0 0"
+                               FontWeight="Bold"/>
+
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+
+                        <Border BorderBrush="Cyan"
+                            BorderThickness="2"
+                            CornerRadius="5"
+                            Margin="0 1"
+                            Background="Wheat">
+
+                            <TextBox Width="190"
+                                Text="{Binding FirstName}"/>
+
+                        </Border>
+
+                        <Border BorderBrush="Cyan"
+                            BorderThickness="2"
+                            CornerRadius="5"
+                            Margin="30 1"
+                            Background="Wheat">
+
+                            <TextBox Width="190"
+                            Text="{Binding LastName}"/>
+
+                        </Border>
+
+                    </StackPanel>
+
+
+                    <TextBlock Text="Address"
+                            Margin="0 10 0 0"
+                           FontWeight="Bold"/>
+
+                    <Border BorderBrush="Cyan"
+                            BorderThickness="2"
+                            CornerRadius="5"
+                            Margin="0 1"
+                            Background="Wheat"
+                            HorizontalAlignment="Left">
+
+                        <TextBox Width="320"
+                             HorizontalAlignment="Left"
+                             Margin="0 0"
+                             Text="{Binding Address}"/>
+
+                    </Border>
+
+                    <StackPanel Orientation="Horizontal">
+
+                        <TextBlock Text="Birth Date"
+                                Margin="0 10 0 0"
+                               FontWeight="Bold"/>
+
+                        <TextBlock Text="Gender"
+                                Margin="166 10 0 0"
+                               FontWeight="Bold"/>
+
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+
+                        <Border BorderBrush="Cyan"
+                            BorderThickness="2"
+                            CornerRadius="5"
+                            Margin="0 1"
+                            Background="White"
+                            HorizontalAlignment="Left">
+
+                            <!--<TextBox Width="190"
+                                Text="{Binding BDay}"/>-->
+
+                            <DatePicker x:Name="SDate" 
+                                     IsTodayHighlighted="True"
+                                     Width="190"  
+                                     FontSize="12"
+                                     VerticalAlignment="Center"
+                                     HorizontalAlignment="Center"
+                                     SelectedDate="{Binding BDay,UpdateSourceTrigger=PropertyChanged}"
+                                     SelectedDateFormat="Short"
+                                     DisplayDateStart="11/30/1950"
+                                     DisplayDateEnd="12/31/2024"/>
+                            
+                        </Border>
+
+                        <!--<DatePicker Template=""/>-->
+
+                        <Border BorderBrush="Cyan"
+                            BorderThickness="2"
+                            CornerRadius="5"
+                            Margin="30 1"
+                            Background="Wheat"
+                            HorizontalAlignment="Left">
+
+                            <ComboBox x:Name="Gender" 
+                              Width="100"
+                              IsEditable="True"
+                              Foreground="Black"
+                              FontSize="12"
+                              ItemsSource="{Binding Path=Genders}"
+                              SelectedItem="{Binding Gender}"/>
+
+                        </Border>
+
+
+
+                        <!--<TextBox Width="100" 
+                             HorizontalAlignment="Left"
+                             Margin="30 0"
+                             Text="{Binding Gender}"
+                             Style="{StaticResource SubMenuBox}"/>-->
+
+                    </StackPanel>
+
+                    <TextBlock Text="Department"
+                       Margin="0 10 0 0"
+                           FontWeight="Bold"/>
+
+                    <Border BorderBrush="Cyan"
+                            BorderThickness="2"
+                            CornerRadius="5"
+                            Margin="0 1"
+                            Background="Wheat"
+                            HorizontalAlignment="Left">
+
+                        <TextBox Width="190"
+                        Margin="0 0"
+                        Text="{Binding Department}"/>
+
+                    </Border>
+
+                    <TextBlock Text="Module details"
+                            Margin="0 10 0 5"
+                            FontWeight="Bold"
+                            FontSize="15"/>
+
+                    <StackPanel Orientation="Horizontal">
+
+                        <Border Background="LightGray" Margin="0 0 0 0" BorderBrush="Black" BorderThickness="1">
+
+                            <TextBlock Text="Module ID" 
+                           Height="15"
+                           Width="70"
+                           Margin="0 0 5 0"
+                           FontSize="12"
+                           Style="{StaticResource ListText}"
+                           />
+
+                        </Border>
+
+                        <Border Background="LightGray" Margin="5 0 0 0" BorderBrush="Black" BorderThickness="1">
+
+                            <TextBlock Text="Module Name"
+                           Height="15"
+                           Width="240"
+                           FontSize="12"
+                           Style="{StaticResource ListText}"/>
+
+                        </Border>
+
+                        <Border Background="LightGray" Margin="5 0" BorderBrush="Black" BorderThickness="1">
+
+                            <TextBlock Text="Result" 
+                           Height="15"
+                           Width="50"
+                           FontSize="12"
+                           Style="{StaticResource ListText}"/>
+
+                        </Border>
+
+                    </StackPanel>
+
+                    <ListView ItemsSource="{Binding allModules}"
+                          VerticalContentAlignment="Stretch"
+                          ScrollViewer.VerticalScrollBarVisibility="Visible"
+                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                          ScrollViewer.CanContentScroll="False"
+                          MaxHeight="300"
+                          Width="400"
+                          Margin="0 0 0 0"
+                          HorizontalAlignment="Left">
+
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="{x:Type ListViewItem}">
+                                <Setter Property="Height" Value="30"/>
+                                <Setter Property="Width" Value="390"/>
+                                <Setter Property="Background" Value="White"/>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Border Margin="0"
+                                BorderBrush="Black"
+                                CornerRadius="5">
+
+                                    <Grid Width="400" VerticalAlignment="Center"
+                                          HorizontalAlignment="Left">
+
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="75"/>
+                                            <ColumnDefinition Width="250"/>
+                                            <ColumnDefinition Width="45"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Border Grid.Column="0"  
+                                                BorderBrush="White" 
+                                                BorderThickness="1"
+                                                Background="DarkGray">
+
+                                            <TextBlock FontSize="15" 
+                                               Text="{Binding moduleID}" 
+                                               HorizontalAlignment="center"/>
+
+                                        </Border>
+
+                                        <Border Grid.Column="1" 
+                                        BorderBrush="White" 
+                                        BorderThickness="1"
+                                        Background="DarkGray"
+                                        Margin="5 0 0 0">
+
+                                            <TextBlock     FontSize="15"
+                                                   Text="{Binding moduleName}"
+                                                   HorizontalAlignment="Left"
+                                                   Margin="5 0"/>
+                                        </Border>
+
+                                        <Border Grid.Column="2" 
+                                        BorderBrush="White" 
+                                        BorderThickness="1"
+                                        Background="DarkGray"
+                                        Margin="5 0 0 0">
+
+                                            <TextBlock FontSize="15"
+                                               Text="{Binding moduleResult}"
+                                               HorizontalAlignment="center"/>
+                                        </Border>
+
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
+                    <StackPanel Orientation="Horizontal" Margin="0 5">
+                        <TextBlock Text="Module ID:"
+                                Margin="0 0 0 0"
+                                Height="20"
+                                FontWeight="Bold"/>
+
+                        <Border BorderBrush="Cyan"
+                            BorderThickness="2"
+                            CornerRadius="5"
+                            Margin="5 1"
+                            Background="Wheat"
+                            HorizontalAlignment="Left"
+                            Height="22">
+
+                            <TextBox Text="{Binding MdID}"
+                                 Width="50"
+                                 x:Name="idBox"
+                                 VerticalAlignment="Center"/>
+
+                            <!--<ComboBox Width="50" VerticalAlignment="Center" 
+                                      SelectedItem="{Binding MdID}"/>-->
+
+                        </Border>
+
+                        <TextBlock Text="Result:"
+                                Margin="40 0 0 0"
+                                Height="20"
+                                FontWeight="Bold"/>
+
+                        <Border BorderBrush="Cyan"
+                            BorderThickness="2"
+                            CornerRadius="5"
+                            Margin="5 1"
+                            Background="Wheat"
+                            HorizontalAlignment="Left"
+                            Height="22">
+
+                            <TextBox Text="{Binding MdResult}"
+                                x:Name="rsltBox"
+                                Width="50"
+                                Height="20"
+                                TextAlignment="Center"/>
+
+                            <!--<ComboBox x:Name="rsltBox"
+                                      Width="50" VerticalAlignment="Center" 
+                                      SelectedItem="{Binding MdResult}"
+                                      ItemsSource="{Binding Path=Results}"/>-->
+
+                        </Border>
+
+                        <Button Content="Add Module" 
+                            Margin="20 0 0 0"
+                            Style="{StaticResource SubMenuText}"
+                            Command="{Binding addModulesCommand}"
+                            Click="Button_Click"/>
+
+                    </StackPanel>
+
+                </StackPanel>
+            </ScrollViewer>
+
+            <Button Content="Add Student" Margin="80 10"
+                    Grid.Row="2"
+                    Width="180"
+                    Style="{StaticResource SubMenuText}"
+                    HorizontalAlignment="Center"
+                    Command="{Binding addStudentCommand}"/>
+
+        </Grid>
+
+
+    </Grid>
+</Window>
